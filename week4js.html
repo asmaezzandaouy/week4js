@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Photo Gallery</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            justify-content: center;
+            padding: 20px;
+        }
+        figure {
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            padding: 10px;
+            width: 200px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        figure:focus {
+            outline: 3px solid #007BFF;
+            box-shadow: 0 0 15px rgba(0, 123, 255, 0.5);
+        }
+        figure img {
+            max-width: 100%;
+            border-radius: 5px;
+        }
+        figcaption {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #555;
+        }
+    </style>
+</head>
+<body onload="initializeGallery()">
+
+    <h1 style="text-align:center; margin: 20px;">Interactive Photo Gallery</h1>
+    <div class="gallery">
+        <!-- Images with alt attributes -->
+        <figure tabindex="0">
+            <img src="image1.jpg" alt="Description of image 1">
+            <figcaption>Caption for Image 1</figcaption>
+        </figure>
+        <figure tabindex="0">
+            <img src="image2.jpg" alt="Description of image 2">
+            <figcaption>Caption for Image 2</figcaption>
+        </figure>
+        <figure tabindex="0">
+            <img src="image3.jpg" alt="Description of image 3">
+            <figcaption>Caption for Image 3</figcaption>
+        </figure>
+        <figure tabindex="0">
+            <img src="image4.jpg" alt="Description of image 4">
+            <figcaption>Caption for Image 4</figcaption>
+        </figure>
+        <figure tabindex="0">
+            <img src="image5.jpg" alt="Description of image 5">
+            <figcaption>Caption for Image 5</figcaption>
+        </figure>
+        <figure tabindex="0">
+            <img src="image6.jpg" alt="Description of image 6">
+            <figcaption>Caption for Image 6</figcaption>
+        </figure>
+    </div>
+
+    <script>
+        function initializeGallery() {
+            console.log("Gallery initialized");
+
+            // Select all figures in the gallery
+            const figures = document.querySelectorAll("figure");
+
+            // Add event listeners for mouse and keyboard events
+            figures.forEach(figure => {
+                figure.addEventListener("mouseover", () => {
+                    figure.style.transform = "scale(1.05)";
+                    figure.style.boxShadow = "0 4px 8px rgba(0, 0, 0, 0.2)";
+                });
+
+                figure.addEventListener("mouseleave", () => {
+                    figure.style.transform = "scale(1)";
+                    figure.style.boxShadow = "none";
+                });
+
+                figure.addEventListener("focus", () => {
+                    console.log("Figure focused");
+                });
+
+                figure.addEventListener("blur", () => {
+                    console.log("Figure blurred");
+                });
+            });
+
+            // Add tabindex attribute dynamically
+            addTabIndexToFigures();
+        }
+
+        function addTabIndexToFigures() {
+            const figures = document.querySelectorAll("figure");
+            figures.forEach((figure, index) => {
+                figure.setAttribute("tabindex", index + 1);
+                console.log(`Tabindex added to figure ${index + 1}`);
+            });
+        }
+    </script>
+</body>
+</html>
